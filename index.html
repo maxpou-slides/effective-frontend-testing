@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TODO</title>
+<meta name="Description" content="Progressive Web App talk's slides">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5B9BD5">
+
+<link rel="icon" type="image/png" sizes="60x60 72x72" href="img/icons/icon-72x72.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/icons/icon-96x96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icons/icon-192x192.png">
+
+<meta name="twitter:site" content="@maxpou">
+<meta name="twitter:title" content="Progressive web apps">
+
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" >
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<!-- Printing and PDF exports -->
+<script>
+var link  = document.createElement( 'link' );
+link.rel  = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class='footer'>
+  <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
+</div>
+<div class="slides container">
+<section>
+  <section>
+    <h2>tests</h2>
+    <p class="me-link">
+      Maxence Poutord - <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
+    </p>
+  </section>
+  <section>
+    <h2>Slides, links, etc.</h2>
+    <h2><a href="https://www.maxpou.fr/talks/">maxpou.fr/talks/</a></h2>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Introduction</h2>
+  </section>
+  <section>
+    <h2>Why not to test?</h2>
+    <ul>
+      <li>"We don't have time to test!"</li>
+      <li>"Test slow me down!" (creation + maintenance)</li>
+      <li>"We don't know how to test and what to test!"</li>
+    </ul>
+  </section>
+  <section>
+    <h2>why we need test</h2>
+    <ul>
+      <li>Gives **confidence** that software works as expected. So it's easier to remove/refactor code</li>
+      <li>Document codebase (unit) and application behavior (e2e).</li>
+      <li>Might helps to write better code (i.e. "wtf I did when I wrote this function?")</li>
+      <li>Reduce maintenance app so the Money (see cost of bug). </li>
+      <li>Deploy to prod on Friday? Where's the problem?</li>
+    </ul>
+  </section>
+  <section>
+    <h2>The importance of automation</h2>
+    <aside class="notes">
+      every code change must be sent through PR. No commit on master.
+      automatically trigger build on PR
+      coverage thresholds for new code
+      if test fail, don't remove it. Fix it!
+    </aside>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Testing pyramid</h2>
+  </section>
+  <section>
+    <h1>Unit tests</h1>
+  </section>
+  <section>
+    <h2>Integration</h2>
+  </section>
+  <section>
+    <h2>e2e</h2>
+  </section>
+  <section>
+    <h2>Hey, what about static testing?</h2>
+    <p class="fragment">Yes I know it can be annoying...</p>
+    <p class="fragment">But it catches:</p>
+    <ul>
+      <li class="fragment">catch stupid errors (== instead of ===, unused variables...)</li>
+      <li class="fragment">avoid stupid debates (tab vs space, semicolons or not...)</li>
+    </ul>
+    <p class="fragment">Helps to focus on what really matter ❤️ (and it's cheap!)</p>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Unit tests</h2>
+  </section>
+  <section>
+    <h2>Example</h2>
+    ...
+  </section>
+  <section>
+    <h2>Jest</h2>
+    Because using 3 packages is confusing (mocha/karma/chai)
+  </section>
+  <section>
+    <h2>How to test component?</h2>
+  </section>
+  <section>
+    <h2>Definition of a good test</h2>
+  </section>
+  <section>
+    <h2>Code coverage</h2>
+  </section>
+  <section>
+    <h2>👌 Following cc evolution</h2>
+    https://www.sonarsource.com/index/screenshot-homepage.png
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Integration test</h2>
+  </section>
+  <section>
+    <h2>when integration test?</h2>
+  </section>
+  <section>
+    <h2>Example</h2>
+  </section>
+  <section>
+    <h2>Snapshot testing</h2>
+  </section>
+  <section>
+    <h2>Mock</h2>
+    mock sucks. avoid them as much as posible.
+    Every time we mock, we diverge from the real world scenario.
+    only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)
+  </section>
+</section>
+<section>
+  <section>
+    <h2>e2e</h2>
+  </section>
+  <section>
+    <h2>example</h2>
+    ... complicated test...
+  </section>
+  <section>
+    <h2>Chrome --headless</h2>
+    <h3>A new game changer</h3>
+  </section>
+</section>
+<section>
+  <section>
+    <h2>Backup</h2>
+  </section>
+  <section>
+      https://www.youtube.com/watch?v=zqdCM8zR6Mc
+  </section>
+</section>
+</div>
+</div>
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script>
+// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+  controls: false,
+  progress: true,
+  slideNumber: true,
+  history: true,
+
+  transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+  // Optional reveal.js plugins
+  dependencies: [
+    { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+    { src: 'reveal.js/plugin/notes/notes.js', async: true }
+  ]
+});
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67868977-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
