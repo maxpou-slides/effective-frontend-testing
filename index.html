@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>TODO</title>
+<title>Effective Frontend testing</title>
 <meta name="Description" content="Progressive Web App talk's slides">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#5B9BD5">
@@ -37,7 +37,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <div class="slides container">
 <section>
   <section>
-    <h2>tests</h2>
+    <h2>Effective Frontend testing</h2>
     <p class="me-link">
       Maxence Poutord - <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
     </p>
@@ -53,24 +53,31 @@ document.getElementsByTagName('head')[0].appendChild(link);
   </section>
   <section>
     <h2>Why not to test?</h2>
-    <ul>
-      <li>"We don't have time to test!"</li>
-      <li>"Test slow me down!" (creation + maintenance)</li>
-      <li>"We don't know how to test and what to test!"</li>
+    <ul class="unstyled">
+      <li class="fragment">⏳ "We don't have time to test!"</li>
+      <li class="fragment">🐌 "Test slow me down!" (creation + maintenance)</li>
+      <li class="fragment">🤷‍♂️ "We don't know how to test and what to test!"</li>
     </ul>
   </section>
   <section>
-    <h2>why we need test</h2>
-    <ul>
+    <h2>💪 Why we need test</h2>
+    <ul class="unstyled">
+      <li class="fragment">🤗 Confidence</li>
+      <li class="fragment">📖 Document codebase</li>
+      <li class="fragment">👊 Helps to write better code</li>
+      <li class="fragment">💸 Reduce maintenance cost</li>
+      <li class="fragment">🍻 Deploy to prod on Friday? Why not!</li>
+    </ul>
+    <aside class="notes">
       <li>Gives **confidence** that software works as expected. So it's easier to remove/refactor code</li>
       <li>Document codebase (unit) and application behavior (e2e).</li>
       <li>Might helps to write better code (i.e. "wtf I did when I wrote this function?")</li>
       <li>Reduce maintenance app so the Money (see cost of bug). </li>
       <li>Deploy to prod on Friday? Where's the problem?</li>
-    </ul>
+    </aside>
   </section>
-  <section>
-    <h2>The importance of automation</h2>
+  <section data-background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6GwuL_ubkAVrDBkZ5D2trpo1Mgn82H1gneU_LSv25lb6qIrt">
+    <h2 style="text-shadow: 1px 1px 4px rgba(34,34,34,.6);">The importance of automation</h2>
     <aside class="notes">
       every code change must be sent through PR. No commit on master.
       automatically trigger build on PR
@@ -84,7 +91,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <h2>Testing pyramid</h2>
   </section>
   <section>
-    <h1>Unit tests</h1>
+    <h2>Unit tests</h2>
   </section>
   <section>
     <h2>Integration</h2>
@@ -94,59 +101,156 @@ document.getElementsByTagName('head')[0].appendChild(link);
   </section>
   <section>
     <h2>Hey, what about static testing?</h2>
-    <p class="fragment">Yes I know it can be annoying...</p>
-    <p class="fragment">But it catches:</p>
-    <ul>
-      <li class="fragment">catch stupid errors (== instead of ===, unused variables...)</li>
-      <li class="fragment">avoid stupid debates (tab vs space, semicolons or not...)</li>
+    <p>
+      <span class="fragment">Yes I know it can be annoying...</span>
+      <span class="fragment">but it catches:</span>
+    </p>
+
+    <ul class="unstyled">
+      <li class="fragment">👍 dumb errors <br><i>(== instead of ===, unused variables...)</i></li>
+      <li class="fragment">👍 avoid steril debates <br><i>(tab vs space, semicolons or not...)</i></li>
     </ul>
-    <p class="fragment">Helps to focus on what really matter ❤️ (and it's cheap!)</p>
+    <p class="fragment">➡ Helps to focus on what really matter ❤️</p>
   </section>
 </section>
 <section>
   <section>
     <h2>Unit tests</h2>
+    <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4"></video>
   </section>
   <section>
     <h2>Example</h2>
-    ...
+    <pre>
+      <code>
+const vatCalculator = require('./vatCalculator')
+
+it('return the expected VAT', () => {
+  const basket = [
+    { item: '🍺', price: 3 },
+    { item: '🍔', price: 5.5 }
+  ]
+
+  expect(vatCalculator(basket)).toBe(1.3)
+});
+      </code>
+    </pre>
   </section>
   <section>
     <h2>Jest</h2>
-    Because using 3 packages is confusing (mocha/karma/chai)
+    <i>Because using 3 packages for testing is confusing</i>
   </section>
   <section>
     <h2>How to test component?</h2>
+    <p>Treat your component as a black box:</p>
+    <ul>
+      <li class="fragment">props</li>
+      <li class="fragment">events (click, select...)</li>
+      <li class="fragment">lifecycle events (mounted, destroyed...)</li>
+      <li class="fragment">event emitted</li>
+      <li class="fragment">output (DOM)</li>
+      <li class="fragment">props pass to subcomponents</li>
+      <li class="fragment"><span class="fragment strike">Internal state (data, computed properties)</span></li>
+    </ul>
   </section>
   <section>
     <h2>Definition of a good test</h2>
+    <ul class="unstyled">
+      <li class="fragment">🐟 Dead simple</li>
+      <li class="fragment">🛌 Cover the most common usages</li>
+      <li class="fragment">⚡️ Lightning fast (nobody like to wait!)</li>
+      <li class="fragment">🤯 Doesn't test external library</li>
+    </ul>
+    <aside class="notes">
+      1. no complexity
+      2. its ok not to reach 100%cc
+    </aside>
   </section>
   <section>
     <h2>Code coverage</h2>
+    <img src="https://lostechies.com/content/derickbailey/uploads/2011/03/image_72328864.png" alt="">
   </section>
   <section>
     <h2>👌 Following cc evolution</h2>
-    https://www.sonarsource.com/index/screenshot-homepage.png
+    <img src="./img/coverage-evolution.png" alt="Following cc evolution" style="width: 70%;">
+    <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer">github.com/maxpou/gitvub/pull/36</a></p>
+  </section>
+  <section>
+    <h2>📸 Snapshot testing</h2>
+  </section>
+  <section>
+    <h2>Example 1/2</h2>
+    <pre>
+      <code>
+const vatCalculator = require('./vatCalculator')
+
+it('return the expected VAT', () => {
+  const basket = [
+    { item: '🍺', price: 3 },
+    { item: '🍔', price: 5.5 }
+  ]
+  console.log(vatCalculator(basket))
+});
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>Example 2/2</h2>
+    <pre>
+      <code>
+const vatCalculator = require('./vatCalculator')
+
+it('return the expected VAT', () => {
+  const basket = [
+    { item: '🍺', price: 3 },
+    { item: '🍔', price: 5.5 }
+  ]
+  expect(vatCalculator(basket)).toBe(3.55)
+});
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>Misconceptions</h2>
+    <ul class="unstyled">
+      <li class="fragment">👀 Snapshot testing is NOT visual regression testing</li>
+      <li class="fragment">💁🏻‍♀️ Not only for DOM testing!!!</li>
+      <li class="fragment">🙅‍♂️ Purpose is not to replace existing assertions. <br>
+        ➡ lazy way to provide test where there's not!
+      </li>
+      <li class="fragment">🐑 Don’t fall into the temptation of quickly update snapshot without checking the real change!</li>
+    </ul>
   </section>
 </section>
 <section>
   <section>
     <h2>Integration test</h2>
+    <ul>
+      <li>dumb components ==> unit tests</li>
+      <li>containers (router, store) ===> integration tests</li>
+    </ul>
   </section>
   <section>
-    <h2>when integration test?</h2>
+    <h2>Benefits</h2>
+    <img src="https://cdn-images-1.medium.com/max/1600/1*UtZzMT32fRMnSN-HmgiSVQ.gif" alt="unit vs. integration test" style="width: 80%;">
   </section>
   <section>
-    <h2>Example</h2>
+    <h2>Example...</h2>
   </section>
   <section>
-    <h2>Snapshot testing</h2>
-  </section>
-  <section>
-    <h2>Mock</h2>
-    mock sucks. avoid them as much as posible.
-    Every time we mock, we diverge from the real world scenario.
-    only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)
+    <h2>About mock</h2>
+    <ul class="unstyled">
+      <li class="fragment">👎 Mocks sucks</li>
+      <li class="fragment">🤝 Ok for:</li>
+      <ul class="unstyled">
+        <li class="fragment">External calls (HTTP GET/POST/...)</li>
+        <li class="fragment">Browsers API (local/session storage, navigator...)</li>
+      </ul>
+    </ul>
+    <aside class="notes">
+        mock sucks. avoid them as much as posible.
+        Every time we mock, we diverge from the real world scenario.
+        only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)    
+    </aside>
   </section>
 </section>
 <section>
@@ -161,6 +265,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <h2>Chrome --headless</h2>
     <h3>A new game changer</h3>
   </section>
+</section>
+<section>
+  <h3>Don't forget the most important:</h3>
+  <h2 class="fragment">we write tests to catch bugs 🐛</h2>
 </section>
 <section>
   <section>
