@@ -16,6 +16,7 @@
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="css/github.css">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" >
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -48,9 +49,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
   </section>
 </section>
 <section>
-  <section>
-    <h2>Introduction</h2>
-  </section>
   <section>
     <h2>Why not to test?</h2>
     <ul class="unstyled">
@@ -89,16 +87,16 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section>
   <section>
     <h2>Testing pyramid</h2>
+    <img src="./img/testing-pyramid.png" alt="Testing pyramid">
   </section>
   <section>
-    <h2>Unit tests</h2>
+    <h2>Testing Trophy</h2>
+    <img src="./img/testing-trophy.jpg" alt="Testing Trophy" style="width: 50%;">
+    <p>© Kent C. Dodds</p>
   </section>
-  <section>
-    <h2>Integration</h2>
-  </section>
-  <section>
-    <h2>e2e</h2>
-  </section>
+  <!-- <section>
+    <h2>Unit tests vs. Integration vs. e2e</h2>
+  </section> -->
   <section>
     <h2>Hey, what about static testing?</h2>
     <p>
@@ -150,6 +148,7 @@ it('return the expected VAT', () => {
       <li class="fragment">output (DOM)</li>
       <li class="fragment">props pass to subcomponents</li>
       <li class="fragment"><span class="fragment strike">Internal state (data, computed properties)</span></li>
+      <p class="fragment">👉 if public API doesn't change, we should refactor component without changing tests!</p>
     </ul>
   </section>
   <section>
@@ -166,7 +165,7 @@ it('return the expected VAT', () => {
     </aside>
   </section>
   <section>
-    <h2>Code coverage</h2>
+    <h2>Code coverage (cc)</h2>
     <img src="https://lostechies.com/content/derickbailey/uploads/2011/03/image_72328864.png" alt="">
   </section>
   <section>
@@ -175,10 +174,47 @@ it('return the expected VAT', () => {
     <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer">github.com/maxpou/gitvub/pull/36</a></p>
   </section>
   <section>
+    <h2>💩 Code coverage bullshit</h2>
+    <img src="./img/cc-bs.png" alt="Code coverage bullshit" style="width: 50%;">
+    <p>High coverage !== code quality</p>
+  </section>
+  <section>
+    <h2>💩 Code coverage bullshit</h2>
+    <pre>
+      <code>
+function add (a, b) {
+  launchNuclearMissile()
+  return a + b
+}
+
+// ...
+test('add.js', () => {
+  assert(add(1, 2)).toBe(3)
+});
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>💩 Code coverage bullshit</h2>
+    <pre><code>
+function foo(a, unitTest = false) {
+  // code
+
+  if (weirdAndHardToConditionToTest || unitTest) {
+    // code
+  }
+
+  return bar;
+}
+    </code></pre>
+  </section>
+</section>
+<section>
+  <section>
     <h2>📸 Snapshot testing</h2>
   </section>
   <section>
-    <h2>Example 1/2</h2>
+    <h2>Example</h2>
     <pre>
       <code>
 const vatCalculator = require('./vatCalculator')
@@ -194,7 +230,7 @@ it('return the expected VAT', () => {
     </pre>
   </section>
   <section>
-    <h2>Example 2/2</h2>
+    <h2>Example</h2>
     <pre>
       <code>
 const vatCalculator = require('./vatCalculator')
@@ -210,6 +246,49 @@ it('return the expected VAT', () => {
     </pre>
   </section>
   <section>
+    <h2>Example</h2>
+    <pre>
+      <code>
+const vatCalculator = require('./vatCalculator')
+
+it('return the expected VAT', () => {
+  const basket = [
+    { item: '🍺', price: 3 },
+    { item: '🍔', price: 5.5 }
+  ]
+  expect(vatCalculator(basket)).toMatchSnapshot()
+});
+      </code>
+    </pre>
+    <pre class="fragment"><code>
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return the expected VAT 1`] = `3.5`;        
+    </code></pre>
+  </section>
+  <section>
+    <img src="./img/snap.png" alt="snapshot">
+  </section>
+  <section>
+    <h2>👍 Good usecase</h2>
+    <pre><code>
+it('should render correctly', () => {
+  const wrapper = shallowMount(Alert, {
+    propsData: {
+      message: 'Test message',
+    },
+  });
+  expect(wrapper.html()).toMatchSnapshot();
+});      
+
+exports[`Alert.vue should render correctly 1`] = `
+"<div role=\\"alert\\" class=\\"alert alert-danger\\"><!---->
+  Test message
+</div>"
+`;
+    </code></pre>
+  </section>
+  <section>
     <h2>Misconceptions</h2>
     <ul class="unstyled">
       <li class="fragment">👀 Snapshot testing is NOT visual regression testing</li>
@@ -219,6 +298,16 @@ it('return the expected VAT', () => {
       </li>
       <li class="fragment">🐑 Don’t fall into the temptation of quickly update snapshot without checking the real change!</li>
     </ul>
+  </section>
+  <section>
+    <h2>🤔 Huge Snapshot?</h2>
+    <ul class="unstyled">
+      <li class="fragment">🎍 Tests are about <b>confidence</b></li>
+      <li class="fragment">🙅‍♀️ Nobody like to review huge snapshots</li>
+      <li class="fragment">👍 Use something else! (or <code>shallowMount</code>)</li>
+    </ul>
+    <br>
+    <p class="fragment">👌 eslint: <a href="https://github.com/jest-community/eslint-plugin-jest/blob/master/docs/rules/no-large-snapshots.md" target="_blank" rel="noopener noreferrer">jest/no-large-snapshots (default: 12 lines)</a></p>
   </section>
 </section>
 <section>
@@ -234,7 +323,52 @@ it('return the expected VAT', () => {
     <img src="https://cdn-images-1.medium.com/max/1600/1*UtZzMT32fRMnSN-HmgiSVQ.gif" alt="unit vs. integration test" style="width: 80%;">
   </section>
   <section>
-    <h2>Example...</h2>
+    <h2>Example in VueJS</h2>
+    <pre>
+      <code>
+import { mount, createLocalVue } from '@vue/test-utils'
+import VueRouter from 'vue-router'
+
+const localVue = createLocalVue()
+
+localVue.use(VueRouter)
+localVue.use(Vuex)
+const router = new VueRouter()
+
+const store = new Vuex.Store({
+  state: {},
+})
+
+mount(Component, {
+  localVue,
+  router,
+  store,
+})
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>About: Async tests</h2>
+    <pre class="fragment">
+      <code class="javascript" data-trim data-noescape>
+test('should render an page with data', async () => {
+  <mark>expect.assertions(1)</mark>
+
+  const wrapper = mount(StudentList, {
+    localVue,
+    router,
+    store,
+    sync: false,
+  })
+  <mark>await flushPromises()</mark>
+  
+  expect(wrapper.html()).toMatchSnapshot()
+  // extra security (avoid empty table in snapshot)
+  expect(wrapper.text()).toContain('Ralph Wiggum')
+})
+
+      </code>
+    </pre>
   </section>
   <section>
     <h2>About mock</h2>
@@ -247,13 +381,13 @@ it('return the expected VAT', () => {
       </ul>
     </ul>
     <aside class="notes">
-        mock sucks. avoid them as much as posible.
-        Every time we mock, we diverge from the real world scenario.
-        only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)    
+      mock sucks. avoid them as much as posible.
+      Every time we mock, we diverge from the real world scenario.
+      only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)    
     </aside>
   </section>
 </section>
-<section>
+<!-- <section>
   <section>
     <h2>e2e</h2>
   </section>
@@ -265,10 +399,30 @@ it('return the expected VAT', () => {
     <h2>Chrome --headless</h2>
     <h3>A new game changer</h3>
   </section>
-</section>
+</section> -->
 <section>
-  <h3>Don't forget the most important:</h3>
-  <h2 class="fragment">we write tests to catch bugs 🐛</h2>
+  <section>
+    <h3>Don't forget the most important</h3>
+    <h2 class="fragment">we write tests to catch bugs 🐛</h2>
+  </section>
+  <section>
+    <h3>If your test is red,</h3>
+    <h2 class="fragment">don't delete it, fix it!</h2>
+    <pre class="fragment">
+      <code class="javascript" data-trim data-noescape>
+// it('should...', () => {
+//   expect(actions.resetStore).toHaveBeenCalled();
+//   expect(actions.getXXX).toHaveBeenCalled();
+//   expect(actions.getYYY).toHaveBeenCalled();
+// });
+      </code>
+    </pre>
+
+
+  </section>
+  <section>
+    <h2>Thank you!</h2>
+  </section>
 </section>
 <section>
   <section>
