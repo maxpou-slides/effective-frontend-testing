@@ -114,7 +114,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section>
   <section>
     <h2>Unit tests</h2>
-    <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4"></video>
+    <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4" style="width: 70%;"></video>
   </section>
   <section>
     <h2>Example</h2>
@@ -155,9 +155,9 @@ it('return the expected VAT', () => {
     <h2>Definition of a good test</h2>
     <ul class="unstyled">
       <li class="fragment">🐟 Dead simple</li>
-      <li class="fragment">🛌 Cover the most common usages</li>
       <li class="fragment">⚡️ Lightning fast (nobody like to wait!)</li>
       <li class="fragment">🤯 Doesn't test external library</li>
+      <li class="fragment">🛌 Cover the most common usages</li>
     </ul>
     <aside class="notes">
       1. no complexity
@@ -171,7 +171,7 @@ it('return the expected VAT', () => {
   <section>
     <h2>👌 Following cc evolution</h2>
     <img src="./img/coverage-evolution.png" alt="Following cc evolution" style="width: 70%;">
-    <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer">github.com/maxpou/gitvub/pull/36</a></p>
+    <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i> github.com/maxpou/gitvub/pull/36</a></p>
   </section>
   <section>
     <h2>💩 Code coverage bullshit</h2>
@@ -352,7 +352,7 @@ mount(Component, {
     <pre class="fragment">
       <code class="javascript" data-trim data-noescape>
 test('should render an page with data', async () => {
-  <mark>expect.assertions(1)</mark>
+  <mark>expect.assertions(2)</mark>
 
   const wrapper = mount(StudentList, {
     localVue,
@@ -402,12 +402,12 @@ test('should render an page with data', async () => {
 </section> -->
 <section>
   <section>
-    <h3>Don't forget the most important</h3>
+    <h3>Don't forget...</h3>
     <h2 class="fragment">we write tests to catch bugs 🐛</h2>
   </section>
   <section>
     <h3>If your test is red,</h3>
-    <h2 class="fragment">don't delete it, fix it!</h2>
+    <h2 class="fragment">don't delete it, <span class="text-info-bold">fix it!</span></h2>
     <pre class="fragment">
       <code class="javascript" data-trim data-noescape>
 // it('should...', () => {
@@ -417,8 +417,10 @@ test('should render an page with data', async () => {
 // });
       </code>
     </pre>
-
-
+  </section>
+  <section>
+    <h3>Testing is not a "nice to have"</h3>
+    <h2>It's a <span class="text-info-bold">delivrable</span></h2>
   </section>
   <section>
     <h2>Thank you!</h2>
@@ -429,7 +431,7 @@ test('should render an page with data', async () => {
     <h2>Backup</h2>
   </section>
   <section>
-      https://www.youtube.com/watch?v=zqdCM8zR6Mc
+    <a href="https://www.youtube.com/watch?v=zqdCM8zR6Mc">Jason Lengstorf – Building a testing- and quality-driven culture at IBM</a>
   </section>
 </section>
 </div>
