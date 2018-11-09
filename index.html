@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Effective Frontend testing</title>
-<meta name="Description" content="Effective Frontend testing slides">
+<title>Effective Frontend Testing</title>
+<meta name="Description" content="Effective Frontend Testing slides">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#5B9BD5">
 
@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="img/icons/icon-192x192.png">
 
 <meta name="twitter:site" content="@maxpou">
-<meta name="twitter:title" content="Effective Frontend testing">
+<meta name="twitter:title" content="Effective Frontend Testing">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="css/bootstrap-grid.min.css">
@@ -38,7 +38,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <div class="slides container">
 <section>
   <section>
-    <h2>Effective Frontend testing</h2>
+    <h2>Effective Frontend Testing</h2>
     <p class="me-link">
       Maxence Poutord - <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
     </p>
@@ -46,6 +46,21 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <section>
     <h2>Slides, links, etc.</h2>
     <h2><a href="https://www.maxpou.fr/speaking/">maxpou.fr/speaking/</a></h2>
+  </section>
+  <section>
+    <h2>👋 Hey I'm Max</h2>
+    <br>
+    <ul class="unstyled">
+      <li>👨🏼‍💻 Sr. Frontend Engineer @VSware (Vue.js)</li>
+      <li>🎒 Digital Nomad & ✈️ Serial Traveler</li>
+      <li>🍺 Beer appreciator</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Effective Frontend Testing</h2>
+    <p class="me-link">
+      Maxence Poutord - <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
+    </p>
   </section>
 </section>
 <section>
@@ -74,15 +89,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
       <li>Deploy to prod on Friday? Where's the problem?</li>
     </aside>
   </section>
-  <section data-background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6GwuL_ubkAVrDBkZ5D2trpo1Mgn82H1gneU_LSv25lb6qIrt">
-    <h2 style="text-shadow: 1px 1px 4px rgba(34,34,34,.6);">The importance of automation</h2>
-    <aside class="notes">
-      every code change must be sent through PR. No commit on master.
-      automatically trigger build on PR
-      coverage thresholds for new code
-      if test fail, don't remove it. Fix it!
-    </aside>
-  </section>
 </section>
 <section>
   <section>
@@ -90,25 +96,45 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <img src="./img/testing-pyramid.png" alt="Testing pyramid">
   </section>
   <section>
+    <h2>Testing in reality</h2>
+    <img src="./img/testing-dorito.jpg" style="width: 40%" alt="testing dorito">
+    <p><small><a href="https://twitter.com/denvercoder/status/960752578198843392">https://twitter.com/denvercoder/status/960752578198843392</a></small></p>
+  </section>
+  <section>
+    <h2>Testing pyramid</h2>
+    <img src="./img/testing-pyramid.png" alt="Testing pyramid">
+  </section>
+  <section>
+    <h2>...but...</h2>
+    <img src="./img/titanic.jpg" alt="titanic" style="width: 100%;">
+  </section>
+  <section>
     <h2>Testing Trophy</h2>
-    <img src="./img/testing-trophy.jpg" alt="Testing Trophy" style="width: 50%;">
+    <img src="./img/testing-trophy.png" alt="Testing Trophy" style="width: 45%;">
     <p>© Kent C. Dodds</p>
   </section>
-  <!-- <section>
-    <h2>Unit tests vs. Integration vs. e2e</h2>
-  </section> -->
+</section>
+<section>
   <section>
-    <h2>Hey, what about static testing?</h2>
+    <h2>Static Testing</h2>
+  </section>
+  <section>
+    <h2>ESLint</h2>
     <p>
       <span class="fragment">Yes I know it can be annoying...</span>
       <span class="fragment">but it catches:</span>
     </p>
-
     <ul class="unstyled">
       <li class="fragment">👍 dumb errors <br><i>(== instead of ===, unused variables...)</i></li>
-      <li class="fragment">👍 avoid steril debates <br><i>(tab vs space, semicolons or not...)</i></li>
+      <li class="fragment">👍 avoid steril debates / bikeshedding <br><i>(tab vs space, semicolons...)</i></li>
     </ul>
+    <br>
     <p class="fragment">➡ Helps to focus on what really matter ❤️</p>
+    <br>
+    <p class="fragment">👨🏻‍💼 easily extendable - <i>i.e. companies internal rules</i> </p>
+  </section>
+  <section>
+    <h2>Flow</h2>
   </section>
 </section>
 <section>
@@ -117,32 +143,36 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4" style="width: 70%;"></video>
   </section>
   <section>
+    <h2>Tips: use Jest</h2>
+    <i>Because using 3 packages for testing is confusing</i>
+  </section>
+  <section>
     <h2>Example</h2>
-    <pre>
+    <img src="./img/unit-example-aaa.png" alt="unit-example">
+    <aside class="notes">
       <code>
 const vatCalculator = require('./vatCalculator')
 
-it('return the expected VAT', () => {
-  const basket = [
+it('should return the expected VAT', () => {
+  const menu = [
     { item: '🍺', price: 3 },
     { item: '🍔', price: 5.5 }
   ]
 
-  expect(vatCalculator(basket)).toBe(1.3)
+  const vat = vatCalculator(basket)
+
+  expect(vat).toBe(1.3)
 });
       </code>
-    </pre>
-  </section>
-  <section>
-    <h2>Jest</h2>
-    <i>Because using 3 packages for testing is confusing</i>
+    </aside>
+    <p class="fragment">Method AAA - Arrange-Act-Assert</p>
   </section>
   <section>
     <h2>How to test component?</h2>
-    <p>Treat your component as a black box:</p>
+    <p>Treat your component as a <span class="text-info-bold">black box</span>:</p>
     <ul>
       <li class="fragment">props</li>
-      <li class="fragment">events (click, select...)</li>
+      <li class="fragment">events (onClick, onSelect...)</li>
       <li class="fragment">lifecycle events (mounted, destroyed...)</li>
       <li class="fragment">event emitted</li>
       <li class="fragment">output (DOM)</li>
@@ -164,35 +194,68 @@ it('return the expected VAT', () => {
       2. its ok not to reach 100%cc
     </aside>
   </section>
+</section>
+<section>
   <section>
-    <h2>Code coverage (cc)</h2>
-    <img src="https://lostechies.com/content/derickbailey/uploads/2011/03/image_72328864.png" alt="">
+    <h2>Code Coverage</h2>
+    <p>example of report</p>
   </section>
   <section>
-    <h2>👌 Following cc evolution</h2>
-    <img src="./img/coverage-evolution.png" alt="Following cc evolution" style="width: 70%;">
-    <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i> github.com/maxpou/gitvub/pull/36</a></p>
+    <h3>How code coverage works is generated?</h3>
+    <img src="./img/how-cc-works.png" style="width: 80%;" class="fragment" alt="how-cc-works part 1">
+    <img src="./img/how-cc-works-2.png" style="width: 80%;" class="fragment" alt="how-cc-works part 2">
+  <aside class="notes">
+    https://blog.npmjs.org/post/178487845610/rethinking-javascript-test-coverage
+    <code>
+function foo (a) {
+  if (a) {
+    // do something with 'a'.
+  } else {
+    // do something else.
+  }
+}
+    </code>
+    <code>
+function foo(a) {
+  cov_2mofekog2n.f[0]++;
+  cov_2mofekog2n.s[0]++;
+  if (a) {
+    // do something with 'a'.
+    cov_2mofekog2n.b[0][0]++;
+  } else {
+    // do something else.
+    cov_2mofekog2n.b[0][1]++;
+  }
+}
+    </code>
+  </aside>
+  </section>
+  <section>
+    <h2>How much?</h2>
+    <img src="./img/cc-sweet-pot.png" class="fragment" alt="cc and sweet pot">
   </section>
   <section>
     <h2>💩 Code coverage bullshit</h2>
     <img src="./img/cc-bs.png" alt="Code coverage bullshit" style="width: 50%;">
-    <p>High coverage !== code quality</p>
+    <p>High coverage !== bug proof</p>
   </section>
   <section>
     <h2>💩 Code coverage bullshit</h2>
-    <pre>
-      <code>
+    <img src="./img/cc-side-effect.png" style="width: 100%;" alt="cc-side-effect">
+    <aside class="notes">
+        <code>
+// add.js
 function add (a, b) {
   launchNuclearMissile()
   return a + b
 }
 
-// ...
+// add.test.js
 test('add.js', () => {
   assert(add(1, 2)).toBe(3)
 });
       </code>
-    </pre>
+    </aside>
   </section>
   <section>
     <h2>💩 Code coverage bullshit</h2>
@@ -208,6 +271,14 @@ function foo(a, unitTest = false) {
 }
     </code></pre>
   </section>
+  <section>
+    <h2>😳 Testing privates functions</h2>
+    ...
+  </section>
+  <section>
+    <h2>⏱ Be careful with metrics</h2>
+    cc is good but is JUST one metric. 
+  </section>
 </section>
 <section>
   <section>
@@ -220,11 +291,30 @@ function foo(a, unitTest = false) {
 const vatCalculator = require('./vatCalculator')
 
 it('return the expected VAT', () => {
-  const basket = [
+  const menu = [
     { item: '🍺', price: 3 },
     { item: '🍔', price: 5.5 }
   ]
-  console.log(vatCalculator(basket))
+  console.log(vatCalculator(menu))
+});
+      </code>
+      <code class="fragment">
+// 3.5
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>Example</h2>
+    <pre>
+      <code>
+const vatCalculator = require('./vatCalculator')
+
+it('return the expected VAT', () => {
+  const menu = [
+    { item: '🍺', price: 3 },
+    { item: '🍔', price: 5.5 }
+  ]
+  expect(vatCalculator(menu)).toBe(3.55)
 });
       </code>
     </pre>
@@ -236,27 +326,11 @@ it('return the expected VAT', () => {
 const vatCalculator = require('./vatCalculator')
 
 it('return the expected VAT', () => {
-  const basket = [
+  const menu = [
     { item: '🍺', price: 3 },
     { item: '🍔', price: 5.5 }
   ]
-  expect(vatCalculator(basket)).toBe(3.55)
-});
-      </code>
-    </pre>
-  </section>
-  <section>
-    <h2>Example</h2>
-    <pre>
-      <code>
-const vatCalculator = require('./vatCalculator')
-
-it('return the expected VAT', () => {
-  const basket = [
-    { item: '🍺', price: 3 },
-    { item: '🍔', price: 5.5 }
-  ]
-  expect(vatCalculator(basket)).toMatchSnapshot()
+  expect(vatCalculator(menu)).toMatchSnapshot()
 });
       </code>
     </pre>
@@ -313,17 +387,10 @@ exports[`Alert.vue should render correctly 1`] = `
 <section>
   <section>
     <h2>Integration test</h2>
-    <ul>
-      <li>dumb components ==> unit tests</li>
-      <li>containers (router, store) ===> integration tests</li>
-    </ul>
+    <img src="./img/unit-vs-integration.gif" class="fragment" alt="unit vs. integration test" style="width: 80%;">
   </section>
   <section>
-    <h2>Benefits</h2>
-    <img src="https://cdn-images-1.medium.com/max/1600/1*UtZzMT32fRMnSN-HmgiSVQ.gif" alt="unit vs. integration test" style="width: 80%;">
-  </section>
-  <section>
-    <h2>Example in VueJS</h2>
+    <h2>Example in Vue.js</h2>
     <pre>
       <code>
 import { mount, createLocalVue } from '@vue/test-utils'
@@ -368,12 +435,18 @@ test('should render an page with data', async () => {
 })
 
       </code>
+      <code>
+const flushPromises = () => new Promise(resolve => setTimeout(resolve));
+      </code>
     </pre>
   </section>
   <section>
-    <h2>About mock</h2>
+    <section>
+      <h2>Mocks</h2>
+    </section>
     <ul class="unstyled">
       <li class="fragment">👎 Mocks sucks</li>
+      <img src="./img/mocks-reality.png" style="width: 70%" class="fragment" alt="Every time we mock, we diverge from the real world scenario.">
       <li class="fragment">🤝 Ok for:</li>
       <ul class="unstyled">
         <li class="fragment">External calls (HTTP GET/POST/...)</li>
@@ -385,6 +458,9 @@ test('should render an page with data', async () => {
       Every time we mock, we diverge from the real world scenario.
       only for external calls (HTTP GET/POST/...) and browsers API (local/session storage, navigator...)    
     </aside>
+  </section>
+  <section>
+    <h2>Mount vs. ShallowMount</h2>
   </section>
 </section>
 <!-- <section>
@@ -402,13 +478,39 @@ test('should render an page with data', async () => {
 </section> -->
 <section>
   <section>
+    <h2>Working together</h2>
+  </section>
+  <section data-background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6GwuL_ubkAVrDBkZ5D2trpo1Mgn82H1gneU_LSv25lb6qIrt">
+    <h2 style="text-shadow: 1px 1px 4px rgba(34,34,34,.6);">The importance of automation</h2>
+    <aside class="notes">
+      every code change must be sent through PR. No commit on master.
+      automatically trigger build on PR
+      coverage thresholds for new code
+      if test fail, don't remove it. Fix it!
+    </aside>
+  </section>
+  <section>
+    <h2>👌 Following cc evolution</h2>
+    <img src="./img/coverage-evolution.png" alt="Following cc evolution" style="width: 70%;">
+    <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i> github.com/maxpou/gitvub/pull/36</a></p>
+  </section>
+  <section>
+    <h3>Low coverage on your team?</h3>
+    <div class="fragment">
+      <h2><span class="text-info-bold">Totem Team</span></h2>
+      <img src="./img/totem.png" alt="totem">
+    </div>
+  </section>
+</section>
+<section>
+  <section>
     <h3>Don't forget...</h3>
     <h2 class="fragment">we write tests to catch bugs 🐛</h2>
   </section>
   <section>
     <h3>If your test is red,</h3>
-    <h2 class="fragment">don't delete it, <span class="text-info-bold">fix it!</span></h2>
-    <pre class="fragment">
+    <h2 class="fragment" data-fragment-index="0">don't delete it, <span class="text-info-bold">fix it!</span></h2>
+    <pre class="fragment" data-fragment-index="0">
       <code class="javascript" data-trim data-noescape>
 // it('should...', () => {
 //   expect(actions.resetStore).toHaveBeenCalled();
@@ -419,16 +521,21 @@ test('should render an page with data', async () => {
     </pre>
   </section>
   <section>
+    <h2>Too many tools?</h2>
+    <img src="./img/plumber.png" alt="Who want to hire plumber who only use a screwdriver?">
+  </section>
+  <section>
+    <h1>🙏</h1>
     <h3>Testing is not a "nice to have"</h3>
     <h2>It's a <span class="text-info-bold">delivrable</span></h2>
   </section>
-  <section>
-    <h2>Thank you!</h2>
-  </section>
+</section>
+<section>
+  <h2>Thank you!</h2>
 </section>
 <section>
   <section>
-    <h2>Backup</h2>
+    <h2>Backup</h2>  
   </section>
   <section>
     <a href="https://www.youtube.com/watch?v=zqdCM8zR6Mc">Jason Lengstorf – Building a testing- and quality-driven culture at IBM</a>

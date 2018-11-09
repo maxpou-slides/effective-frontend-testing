@@ -137,6 +137,7 @@ p.source {
   overflow: auto;
   max-height: 450px;
   word-wrap: normal;
+  border-radius: 7px;
 }
 
 h2 > .emoji {
@@ -209,4 +210,9 @@ div.greyed-out {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+small,
+small a {
+  font-size: 0.7em !important;
 }
