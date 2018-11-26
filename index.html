@@ -33,7 +33,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <body>
 <div class="reveal">
 <div class='footer'>
-  <a href="https://twitter.com/_maxpou"><i class="fa fa-twitter"></i> @_maxpou</a>
+  <a href="https://twitter.com/_maxpou">Maxence Poutord - <i class="fa fa-twitter"></i> @_maxpou</a>
 </div>
 <div class="slides container">
 <section>
@@ -76,17 +76,17 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <h2>💪 Why we need test</h2>
     <ul class="unstyled">
       <li class="fragment">🤗 Confidence</li>
+      <li class="fragment">🍻 Deploy to prod on Friday? Why not!</li>
       <li class="fragment">📖 Document codebase</li>
       <li class="fragment">👊 Helps to write better code</li>
       <li class="fragment">💸 Reduce maintenance cost</li>
-      <li class="fragment">🍻 Deploy to prod on Friday? Why not!</li>
     </ul>
+    <p>TODO: img with cost of BUG?</p>
     <aside class="notes">
       <li>Gives **confidence** that software works as expected. So it's easier to remove/refactor code</li>
       <li>Document codebase (unit) and application behavior (e2e).</li>
       <li>Might helps to write better code (i.e. "wtf I did when I wrote this function?")</li>
       <li>Reduce maintenance app so the Money (see cost of bug). </li>
-      <li>Deploy to prod on Friday? Where's the problem?</li>
     </aside>
   </section>
 </section>
@@ -145,6 +145,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <section>
     <h2>Tips: use Jest</h2>
     <i>Because using 3 packages for testing is confusing</i>
+    <i class="fragment">...and also: watch mode, run with patterns, snapshot testing, well integrated in VSCode (debug mode ❤️)</i>
   </section>
   <section>
     <h2>Example</h2>
@@ -177,7 +178,7 @@ it('should return the expected VAT', () => {
       <li class="fragment">event emitted</li>
       <li class="fragment">output (DOM)</li>
       <li class="fragment">props pass to subcomponents</li>
-      <li class="fragment"><span class="fragment strike">Internal state (data, computed properties)</span></li>
+      <li class="fragment"><span class="fragment strike">Internal state (data, computed properties, methods)</span></li>
       <p class="fragment">👉 if public API doesn't change, we should refactor component without changing tests!</p>
     </ul>
   </section>
@@ -446,7 +447,9 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
     </section>
     <ul class="unstyled">
       <li class="fragment">👎 Mocks sucks</li>
-      <img src="./img/mocks-reality.png" style="width: 70%" class="fragment" alt="Every time we mock, we diverge from the real world scenario.">
+      <center>
+        <img src="./img/mocks-reality.png" style="width: 70%" class="fragment" alt="Every time we mock, we diverge from the real world scenario.">
+      </center>
       <li class="fragment">🤝 Ok for:</li>
       <ul class="unstyled">
         <li class="fragment">External calls (HTTP GET/POST/...)</li>
@@ -468,19 +471,19 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
     <h2>e2e</h2>
   </section>
   <section>
-    <h2>example</h2>
-    ... complicated test...
-  </section>
-  <section>
     <h2>Chrome --headless</h2>
     <h3>A new game changer</h3>
+  </section>
+  <section>
+    <h2>Cypress.io</h2>
   </section>
 </section> -->
 <section>
   <section>
     <h2>Working together</h2>
+    <img src="./img/goat-horse.jpg" alt="goat on horse" style="width: 80%;">
   </section>
-  <section data-background="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6GwuL_ubkAVrDBkZ5D2trpo1Mgn82H1gneU_LSv25lb6qIrt">
+  <section data-background="./img/automation.jpg">
     <h2 style="text-shadow: 1px 1px 4px rgba(34,34,34,.6);">The importance of automation</h2>
     <aside class="notes">
       every code change must be sent through PR. No commit on master.
@@ -536,6 +539,13 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
 <section>
   <section>
     <h2>Backup</h2>  
+  </section>
+  <section>
+    <h1>TLDL;</h1>
+    <ul>
+      <li>Don't test implementation details</li>
+      <li>It's OK not to cover 100%</li>
+    </ul>
   </section>
   <section>
     <a href="https://www.youtube.com/watch?v=zqdCM8zR6Mc">Jason Lengstorf – Building a testing- and quality-driven culture at IBM</a>
