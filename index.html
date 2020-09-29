@@ -51,9 +51,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <h2>👋 Hey I'm Max</h2>
     <br>
     <ul class="unstyled">
-      <li>👨🏼‍💻 Sr. Frontend Engineer @VSware (Vue.js)</li>
-      <li>🎒 Digital Nomad & ✈️ Serial Traveler</li>
+      <li>👨🏼‍💻 Sr. Frontend Engineer @VSware (#Vue.js)</li>
+      <li>🎒 Nomad / Serial Traveler</li>
       <li>🍺 Beer appreciator</li>
+      <li>📬 @_maxpou</li>
     </ul>
   </section>
   <section>
@@ -132,9 +133,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <br>
     <p class="fragment">👨🏻‍💼 easily extendable - <i>i.e. companies internal rules</i> </p>
   </section>
-  <section>
-    <h2>Flow</h2>
-  </section>
 </section>
 <section>
   <section>
@@ -142,7 +140,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4" style="width: 70%;"></video>
   </section>
   <section>
-    <h2>Tips: use Jest</h2>
+    <h2>Recommendation: Jest</h2>
     <i>Because using 3 packages for testing is confusing</i>
     <i class="fragment">...and also: watch mode, run with patterns, snapshot testing, well integrated in VSCode (debug mode ❤️)</i>
   </section>
@@ -169,17 +167,8 @@ it('should return the expected VAT', () => {
   </section>
   <section>
     <h2>How to test component?</h2>
-    <p>Treat your component as a <span class="text-info-bold">black box</span>:</p>
-    <ul>
-      <li class="fragment">props</li>
-      <li class="fragment">events (onClick, onSelect...)</li>
-      <li class="fragment">lifecycle events (mounted, destroyed...)</li>
-      <li class="fragment">event emitted</li>
-      <li class="fragment">output (DOM)</li>
-      <li class="fragment">props pass to subcomponents</li>
-      <li class="fragment"><span class="fragment strike">Internal state (data, computed properties, methods)</span></li>
-      <p class="fragment">👉 if public API doesn't change, we should refactor component without changing tests!</p>
-    </ul>
+    <p class="fragment">Treat your component as a <span class="text-info-bold">black box</span></p>
+    <img src="./img/component-testing.png" alt="don't test internals!" class="fragment" style="width: 80%; background-color: white; border-radius: 5px;padding: 5px;">
   </section>
   <section>
     <h2>Definition of a good test</h2>
@@ -235,12 +224,12 @@ function foo(a) {
     <img src="./img/cc-sweet-pot.png" class="fragment" alt="cc and sweet pot">
   </section>
   <section>
-    <h2>💩 Code coverage bullshit</h2>
-    <img src="./img/cc-bs.png" alt="Code coverage bullshit" style="width: 50%;">
+    <h2>💩 Code coverage BS</h2>
+    <img src="./img/cc-bs.png" alt="Code coverage BS" style="width: 50%;">
     <p>High coverage !== bug proof</p>
   </section>
   <section>
-    <h2>💩 Code coverage bullshit</h2>
+    <h2>⚠️Covered code !== tested code</h2>
     <img src="./img/cc-side-effect.png" style="width: 100%;" alt="cc-side-effect">
     <aside class="notes">
         <code>
@@ -258,26 +247,8 @@ test('add.js', () => {
     </aside>
   </section>
   <section>
-    <h2>💩 Code coverage bullshit</h2>
-    <pre><code>
-function foo(a, unitTest = false) {
-  // code
-
-  if (weirdAndHardToConditionToTest || unitTest) {
-    // code
-  }
-
-  return bar;
-}
-    </code></pre>
-  </section>
-  <section>
-    <h2>😳 Testing privates functions</h2>
-    ...
-  </section>
-  <section>
-    <h2>⏱ Be careful with metrics</h2>
-    cc is good but is JUST one metric. 
+    <h2>Write test for <span class="text-info-bold">confidence</span></h2>
+    <h3>Leave coverage to your manager</h3>
   </section>
 </section>
 <section>
@@ -390,53 +361,20 @@ exports[`Alert.vue should render correctly 1`] = `
     <img src="./img/unit-vs-integration.gif" class="fragment" alt="unit vs. integration test" style="width: 80%;">
   </section>
   <section>
-    <h2>Example in Vue.js</h2>
+    <h2>Vue Testing Library</h2>
+    <h3>Testing Made it Easy</h3>
     <pre>
       <code>
-import { mount, createLocalVue } from '@vue/test-utils'
-import VueRouter from 'vue-router'
+import { render, screen } from '@testing-library/vue'
+import App from '../src/pages/App.vue'
 
-const localVue = createLocalVue()
+it('should find a product', () => {
+  render(App)
 
-localVue.use(VueRouter)
-localVue.use(Vuex)
-const router = new VueRouter()
-
-const store = new Vuex.Store({
-  state: {},
+  screen.getByText('my product')
+  screen.getByText('Kuat Drive Yards, Fondor Shipyards')
+  screen.getByText('$1,143,350,000.00')
 })
-
-mount(Component, {
-  localVue,
-  router,
-  store,
-})
-      </code>
-    </pre>
-  </section>
-  <section>
-    <h2>About: Async tests</h2>
-    <pre class="fragment">
-      <code class="javascript" data-trim data-noescape>
-test('should render an page with data', async () => {
-  <mark>expect.assertions(2)</mark>
-
-  const wrapper = mount(StudentList, {
-    localVue,
-    router,
-    store,
-    sync: false,
-  })
-  <mark>await flushPromises()</mark>
-  
-  expect(wrapper.html()).toMatchSnapshot()
-  // extra security (avoid empty table in snapshot)
-  expect(wrapper.text()).toContain('Ralph Wiggum')
-})
-
-      </code>
-      <code>
-const flushPromises = () => new Promise(resolve => setTimeout(resolve));
       </code>
     </pre>
   </section>
@@ -466,18 +404,6 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
     <img src="./img/mountshallowmount.png" alt="Mount vs. ShallowMount" width="80%">
   </section>
 </section>
-<!-- <section>
-  <section>
-    <h2>e2e</h2>
-  </section>
-  <section>
-    <h2>Chrome --headless</h2>
-    <h3>A new game changer</h3>
-  </section>
-  <section>
-    <h2>Cypress.io</h2>
-  </section>
-</section> -->
 <section>
   <section>
     <h2>Working together</h2>
@@ -498,7 +424,7 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
     <p><a href="https://github.com/maxpou/gitvub/pull/36" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i> github.com/maxpou/gitvub/pull/36</a></p>
   </section>
   <section>
-    <h3>Low coverage on your team?</h3>
+    <h3>Need more tests?</h3>
     <div class="fragment">
       <h2><span class="text-info-bold">Totem Team</span></h2>
       <img src="./img/totem.png" alt="totem">
@@ -506,10 +432,6 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
   </section>
 </section>
 <section>
-  <section>
-    <h3>Don't forget...</h3>
-    <h2 class="fragment">we write tests to catch bugs 🐛</h2>
-  </section>
   <section>
     <h3>If your test is red,</h3>
     <h2 class="fragment" data-fragment-index="0">don't delete it, <span class="text-info-bold">fix it!</span></h2>
@@ -522,10 +444,6 @@ const flushPromises = () => new Promise(resolve => setTimeout(resolve));
 // });
       </code>
     </pre>
-  </section>
-  <section>
-    <h2>Too many tools?</h2>
-    <img src="./img/plumber.png" alt="Who want to hire plumber who only use a screwdriver?">
   </section>
   <section>
     <h1>🙏</h1>
