@@ -140,9 +140,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <video playsinline="" controls="controls" data-paused-by-reveal="" loop="loop" data-autoplay="" data-lazy-loaded="" controlslist="nodownload" src="https://video.twimg.com/tweet_video/CLlxtWaUMAAVBKv.mp4" style="width: 70%;"></video>
   </section>
   <section>
-    <h2>Recommendation: Jest</h2>
-    <i>Because using 3 packages for testing is confusing</i>
-    <i class="fragment">...and also: watch mode, run with patterns, snapshot testing, well integrated in VSCode (debug mode ❤️)</i>
+    <h2>Jest</h2>
+    <i class="fragment">watch mode, run with patterns, snapshot testing, well integrated in VSCode (debug mode ❤️)</i>
   </section>
   <section>
     <h2>Example</h2>
@@ -249,6 +248,7 @@ test('add.js', () => {
   <section>
     <h2>Write test for <span class="text-info-bold">confidence</span></h2>
     <h3>Leave coverage to your manager</h3>
+    <small><a href="https://www.maxpou.fr/code-coverage" target="_blank" rel="noopener noreferrer">[📝 maxpou.fr] Why you shouldn't pay too much attention to your code coverage</a></small>
   </section>
 </section>
 <section>
@@ -363,17 +363,41 @@ exports[`Alert.vue should render correctly 1`] = `
   <section>
     <h2>Vue Testing Library</h2>
     <h3>Testing Made it Easy</h3>
+    <pre class="fragment">
+      <code>
+import { render, screen } from '@testing-library/vue'
+import App from '../src/pages/App.vue'
+
+it('should render a product', () => {
+  render(App)
+
+  screen.getByText('Calzone')
+  screen.getByText('The best pizza ever!')
+  screen.getByText('$8.00')
+})
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>Vue Testing Library</h2>
+    <h3>Testing Made it Easy</h3>
     <pre>
       <code>
 import { render, screen } from '@testing-library/vue'
 import App from '../src/pages/App.vue'
 
-it('should find a product', () => {
-  render(App)
+it('should add items to basket', async () => {
+  await render(App)
 
-  screen.getByText('my product')
-  screen.getByText('Kuat Drive Yards, Fondor Shipyards')
-  screen.getByText('$1,143,350,000.00')
+  await fireEvent.click(screen.getByLabelText('Add Calzone'))
+  await fireEvent.click(screen.getByLabelText('Add Margherita'))
+  await fireEvent.click(screen.getByLabelText('Add Margherita'))
+
+  expect(screen.getByRole('navigation')).toHaveTextContent('Basket (3)')
+  await fireEvent.click(screen.getByText('Basket (3)'))
+
+  await screen.findByText('Total')
+  screen.getByText('$19.00')
 })
       </code>
     </pre>
